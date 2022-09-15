@@ -11,9 +11,9 @@ public class KbeProductApplication {
 
 	static List<Product> products = new LinkedList<Product>();
 
-	public static void main(String[] args) {
-		// SpringApplication.run(KbeProductApplication.class, args);
-		createSampleProducts();
+	public static void main(String[] args) throws Exception {
+		SpringApplication.run(KbeProductApplication.class, args);
+		// createSampleProducts();
 	}
 
 	private static void createSampleProducts() {
@@ -34,11 +34,14 @@ public class KbeProductApplication {
 		Component Kopf2 = new Component("Kopf", "Eichenkopfplatte", "Eiche", "Deutschland", "dunkelbraun", "MLFactory", "Rohling", "neu", "2.50", "sofort lieferbar", "gering");
 		Component Decke2 = new Component("Decke", "Fichtenfunier", "Fichte", "Deutschland", "hellbraun", "ABM", "Funier", "neu", "50.00", "bestellbar", "gering");
 
-		products.add(new Product("Produkt1", Hals1, Steg1, Korpus1, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf1, Wirbel1, Sattel1, Decke1));
-		products.add(new Product("Produkt2", Hals2, Steg1, Korpus2, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf2, Wirbel1, Sattel1, Decke2));
-		products.add(new Product("Produkt3", Hals1, Steg1, Korpus2, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf1, Wirbel1, Sattel1, Decke2));
-		products.add(new Product("Produkt4", Hals2, Steg1, Korpus1, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf2, Wirbel1, Sattel1, Decke1));
-		products.add(new Product("Produkt5", Hals1, Steg1, Korpus2, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf2, Wirbel1, Sattel1, Decke1));
-	}
+		products.add(new Product("a", Hals1, Steg1, Korpus1, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf1, Wirbel1, Sattel1, Decke1));
+		products.add(new Product("b", Hals2, Steg1, Korpus2, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf2, Wirbel1, Sattel1, Decke2));
+		products.add(new Product("c", Hals1, Steg1, Korpus2, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf1, Wirbel1, Sattel1, Decke2));
+		products.add(new Product("k", Hals2, Steg1, Korpus1, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf2, Wirbel1, Sattel1, Decke1));
+		products.add(new Product("q", Hals1, Steg1, Korpus2, Griffbrett1, Tonabnehmer1, Schallloch1, Kopf2, Wirbel1, Sattel1, Decke1));
 
+		for (Product product : products) {
+			System.out.println(product.getAdditionalInfo());
+		}
+	}
 }

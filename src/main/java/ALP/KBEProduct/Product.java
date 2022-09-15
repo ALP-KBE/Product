@@ -1,7 +1,14 @@
 package ALP.KBEProduct;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 
 /**
@@ -21,6 +28,7 @@ public class Product {
     private Component sattel;
     private Component decke;
     private Map<String, Component> components;
+    private String additionalInfo;
 
     public Product(String name,
                     Component hals,
@@ -44,6 +52,7 @@ public class Product {
                         this.wirbel = wirbel;
                         this.sattel = sattel;
                         this.decke = decke;
+                        setAdditionalInfo(name);
                         createMap();
     }
 
@@ -53,6 +62,7 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+        setAdditionalInfo(name);
     }
 
     public Component getHals() {
@@ -154,15 +164,60 @@ public class Product {
         components.put("sattel", sattel);
         components.put("decke", decke);
     }
+
+    private void setAdditionalInfo(String name){
+        String pre = "The name " + name + " can be interpreted as a number which would be ";
+        String post = ", which is ";
+        String fact = "";
+		List<Integer> l = new LinkedList<>();
+		for (int i = 0; i < name.length(); i++) {
+			int num = Character.getNumericValue(name.charAt(i)) - 10;
+			if(num >= 0) {
+				l.add(num);
+			}
+		}
+		String number = "";
+		for (Integer integer : l) {
+			number = number + integer;
+		}
+
+        try {
+            URL url = new URL("http://numbersapi.com/" + number + "/?fragment");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            
+            int response = conn.getResponseCode();
+            
+            if(response != 200) {
+                throw new RuntimeException("HTTPRespone was " + response);
+            }
+            else {
+                StringBuilder sb = new StringBuilder();
+                Scanner sc = new Scanner(url.openStream());
+                while(sc.hasNext()) {
+                    sb.append(sc.nextLine());
+                }
+				fact = sb.toString();
+                sc.close();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        this.additionalInfo = pre + number + post + fact;
+    }
+
+    public String getAdditionalInfo(){
+        return this.additionalInfo;
+    }
     
     @Override
     public String toString() {
         String s = "";
         for(Component component : components.values()){
-            s = s + "<-| ";
-            s = s + component.toString();
-            s = s + " |->";
+            s = s + "<-| " + component.toString() + " |->";
         }
+        s = s + "<-| " + this.additionalInfo + " |->";
         return s;
     }
 }
