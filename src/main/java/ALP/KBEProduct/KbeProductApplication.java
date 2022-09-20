@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ALP.KBEProduct.Model.Component;
+import ALP.KBEProduct.Model.Product;
+
 @SpringBootApplication
 public class KbeProductApplication {
 
