@@ -46,7 +46,7 @@ public class MessagingConfig {
     @Bean
     public AmqpTemplate template(ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        // rabbitTemplate.setMessageConverter(converter());
+        rabbitTemplate.setMessageConverter(converter());
         return rabbitTemplate;
     }
 }
