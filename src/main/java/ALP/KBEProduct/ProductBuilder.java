@@ -23,7 +23,7 @@ public class ProductBuilder {
         if(product == null){
             product = new Product(productName);
         }
-        product.setComponent(component);
+        product.addComponent(component);
         System.out.println(product.toString());
         productMap.put(product.getName(), product);
         productSender.send(new RabbitMessage("product", product));
