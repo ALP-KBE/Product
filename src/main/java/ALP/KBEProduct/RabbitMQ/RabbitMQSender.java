@@ -15,6 +15,7 @@ public class RabbitMQSender {
     private Queue mainQueue;
 
     public void send(Serializable serializable) {
+        System.out.println("send to gateway");
         rabbitTemplate.convertAndSend(mainQueue.getName(), serializable);
     }
 }

@@ -44,6 +44,7 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+        this.setAdditionalInfo(name);
     }
 
     public List<Component> getComponents() {
