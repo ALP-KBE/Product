@@ -50,7 +50,7 @@ public class Product implements Serializable {
         return this.components;
     }
 
-    public void addComponent(Component component){
+    public void addComponent(Component component) {
         this.components.add(component);
     }
 
@@ -94,7 +94,6 @@ public class Product implements Serializable {
         }
         this.additionalInfo = pre + number + post + fact;
     }
-
 
     public String getAdditionalInfo() {
         return this.additionalInfo;
